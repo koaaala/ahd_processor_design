@@ -3,7 +3,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity cpu is
-   Port ( clk : in std_logic );
+   Port ( clk : in std_logic;
+          rst : in std_logic);
 end cpu;
 
 architecture Behavioral of cpu is
@@ -29,6 +30,7 @@ architecture Behavioral of cpu is
         Port ( rd1 : out STD_LOGIC_VECTOR (31 downto 0);
                rd2 : out STD_LOGIC_VECTOR (31 downto 0);
                clk : in STD_LOGIC;
+               rst : in STD_LOGIC;
                we : in STD_LOGIC;
                rs : in STD_LOGIC_VECTOR (4 downto 0);
                rt : in STD_LOGIC_VECTOR (4 downto 0);
@@ -52,6 +54,7 @@ architecture Behavioral of cpu is
     component data_mem is
         Port ( rd : out STD_LOGIC_VECTOR (31 downto 0);
                clk : in STD_LOGIC;
+               rst : in STD_LOGIC;
                we : in STD_LOGIC;
                addr : in STD_LOGIC_VECTOR (31 downto 0);
                wd : in STD_LOGIC_VECTOR (31 downto 0));
@@ -108,9 +111,11 @@ begin
     pc_src(0) <= ctrl_jump;
     pc_src(1) <= (ctrl_branch and alu_eq) or (ctrl_branch and ctrl_jump);
     
-    PC_SYNC : process(clk)
+    PC_SYNC : process(clk, rst)
     begin
-        if rising_edge(clk) then
+        if (rst = '1') then 
+            pc <= TO_UNSIGNED(0, 32);
+        elsif rising_edge(clk) then
             case pc_src is
                 when "00" =>                    -- next inst
                     pc <= pc_pl4;                              
@@ -154,6 +159,7 @@ begin
         port map ( rd1 => reg_rd1,
                    rd2 => reg_rd2,
                    clk => clk,
+                   rst => rst,
                    we => ctrl_regwrt,
                    rs => inst_rs,
                    rt => inst_rt,
@@ -175,6 +181,7 @@ begin
     U_data_mem : data_mem
         port map ( rd => mem_rd,
                    clk => clk,
+                   rst => rst,
                    we => ctrl_sw,
                    addr => alu_result,
                    wd => reg_rd2);

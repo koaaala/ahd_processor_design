@@ -34,6 +34,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity data_mem is
     Port ( rd : out STD_LOGIC_VECTOR (31 downto 0);
            clk : in STD_LOGIC;
+           rst : in STD_LOGIC;
            we : in STD_LOGIC;
            addr : in STD_LOGIC_VECTOR (31 downto 0);
            wd : in STD_LOGIC_VECTOR (31 downto 0));

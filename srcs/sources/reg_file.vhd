@@ -35,6 +35,7 @@ entity reg_file is
     Port ( rd1 : out STD_LOGIC_VECTOR (31 downto 0);
            rd2 : out STD_LOGIC_VECTOR (31 downto 0);
            clk : in STD_LOGIC;
+           rst : in STD_LOGIC;
            we : in STD_LOGIC;
            rs : in STD_LOGIC_VECTOR (4 downto 0);
            rt : in STD_LOGIC_VECTOR (4 downto 0);
