@@ -32,7 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity ins_mem is
-    Port ( ins : out STD_LOGIC_VECTOR (31 downto 0);
+    Port ( inst : out STD_LOGIC_VECTOR (31 downto 0);
            addr : in STD_LOGIC_VECTOR (31 downto 0));
 end ins_mem;
 
