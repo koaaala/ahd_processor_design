@@ -10,7 +10,7 @@ end cpu;
 architecture Behavioral of cpu is
     
     component ins_mem is
-     Port ( ins : out STD_LOGIC_VECTOR (31 downto 0);
+     Port ( inst : out STD_LOGIC_VECTOR (31 downto 0);
             addr : in STD_LOGIC_VECTOR (31 downto 0));
     end component;
     
@@ -140,7 +140,7 @@ begin
     
     -- inst mem
     U_ins_mem : ins_mem 
-       port map ( ins => inst,
+       port map ( inst => inst,
                   addr => std_logic_vector(pc));
     
     U_ctrl_unit : ctrl_unit
