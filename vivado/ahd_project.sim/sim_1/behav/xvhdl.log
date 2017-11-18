@@ -1,4 +1,0 @@
-INFO: [VRFC 10-163] Analyzing VHDL file "/home/koala/workspace/xilinx/ahd_processor_design/srcs/sources/sign_ext.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity sign_ext
-INFO: [VRFC 10-163] Analyzing VHDL file "/home/koala/workspace/xilinx/ahd_processor_design/srcs/testbench/tb_sign_ext.vhd" into library xil_defaultlib
-INFO: [VRFC 10-307] analyzing entity tb_sign_ext
