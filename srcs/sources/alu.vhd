@@ -49,8 +49,13 @@ process(op1,op2)
 begin
 if op1=op2 then
 	eq<='1';
+	lt<='0';
 elsif op1<op2 then
 	lt<='1';
+	eq<='0';
+else
+	eq<='0';
+	lt<='0';
 
 end if;
 end process; 
@@ -58,17 +63,17 @@ end process;
 process(funct,op1,op2) 
 begin
 case funct is
- when "001" => 
+ when "000" => 
  result<= op1 + op2; --addition 
- when "010" => 
+ when "001" => 
  result<= op1 - op2; --subtraction 
- when "011" => 
+ when "010" => 
  result<= op1 and op2; --and
- when "100" => 
+ when "011" => 
  result<= op1 or op2; --or
- when "101" => 
+ when "100" => 
  result<= not (op1 or op2); --not or 
- when "110" => 
+ when "101" => 
 	case op2(4 downto 0) is
 		WHEN "00001" => result <= op1(30 DOWNTO 0) & op1(31 DOWNTO 31);
 		WHEN "00010" => result <= op1(29 DOWNTO 0) & op1(31 DOWNTO 30);
@@ -103,7 +108,7 @@ case funct is
 		WHEN "11111" => result <= op1(0 DOWNTO 0) & op1(31 DOWNTO 1);
 		when others => null;
 	end case;
- when "111" => 
+ when "110" => 
 	case op2(4 downto 0) is
 		WHEN "11111" => result <= op1(30 DOWNTO 0) & op1(31 DOWNTO 31);
 		WHEN "11110" => result <= op1(29 DOWNTO 0) & op1(31 DOWNTO 30);
